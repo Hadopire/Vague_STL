@@ -174,8 +174,9 @@ namespace TableDetail {
 
             friend void swap(TBucket& a, TBucket& b)
             {
-                std::swap(a.m_delta, b.m_delta);
-                std::swap(a.m_pair, b.m_pair);
+                using std::swap;
+                swap(a.m_delta, b.m_delta);
+                swap(a.m_pair, b.m_pair);
             }
         };
 
