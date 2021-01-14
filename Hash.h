@@ -6,6 +6,7 @@ constexpr uint64_t rotr(uint64_t v, unsigned int k)
     return (v >> k) | (v << (8 * sizeof(v) - k));
 }
 
+// https://lemire.me/blog/2018/08/15/fast-strongly-universal-64-bit-hashing-everywhere/
 inline uint64_t hash64(const uint64_t v)
 {
     const uint64_t h1 = v * 0x57D2FE972BC49227ULL;
@@ -13,6 +14,9 @@ inline uint64_t hash64(const uint64_t v)
     return rotr(h1 + h2, 32);
 }
 
+
+// MurmurHash2 by Austin Appleby
+// https://github.com/aappleby/smhasher/blob/master/src/MurmurHash2.cpp
 inline uint64_t hashbytes(const void* ptr, size_t len)
 {
     static constexpr uint64_t seed = 0xe17a1465ULL;
