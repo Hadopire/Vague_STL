@@ -3,6 +3,7 @@
 #include <cassert>
 #include <cstdint>
 #include <string>
+#include <cstring>
 
 #include "Hash.h"
 
@@ -121,10 +122,11 @@ namespace TableDetail {
                 return m_pair;
             }
 
-            static void inline swap(TBucket& a, TBucket& b)
+            friend void swap(TBucket& a, TBucket& b)
             {
-                std::swap(a.m_delta, b.m_delta);
-                std::swap(a.m_pair, b.m_pair);
+                using std::swap;
+                swap(a.m_delta, b.m_delta);
+                swap(a.m_pair, b.m_pair);
             }
         };
 
