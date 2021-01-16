@@ -320,8 +320,10 @@ namespace TableDetail {
 
             Bucket* end = last();
             for (Bucket *it = m_buckets, *src = other.m_buckets; it != end; ++src, ++it) {
-                it->m_delta = src->m_delta;
-                it->m_pair = src->m_pair;
+                if (!src->isEmpty()) {
+                    Pair<Key, Value> newPair(src->pair().first, src->pair().second);
+                    it->insert(src->m_delta, std::move(newPair));
+                }
             }
             m_load = other.m_load;
         }
